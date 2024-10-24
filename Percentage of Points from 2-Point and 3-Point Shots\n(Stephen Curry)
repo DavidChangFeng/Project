@@ -1,0 +1,25 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+file_path = 'NBA_Player_Stats_2.xlsx'
+data = pd.read_excel(file_path)
+
+curry_stats = data[data['Player'] == 'Stephen Curry']
+
+two_point_made = curry_stats['2P'].sum()
+three_point_made = curry_stats['3P'].sum()
+
+points_from_2P = two_point_made * 2
+points_from_3P = three_point_made * 3
+
+labels = ['2pt', '3pt']
+sizes = [points_from_2P, points_from_3P]
+colors = ['#ff9999','#66b3ff']
+
+plt.figure(figsize=(10, 7))
+wedges, texts, autotexts = plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140, colors=colors, explode=(0.1, 0), shadow=True)
+
+plt.title("Percentage of Points from 2-Point and 3-Point Shots\n(Stephen Curry)", fontsize=16, fontweight='bold')
+plt.axis('equal') 
+plt.tight_layout()  
+plt.show()
